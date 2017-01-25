@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">MemoryCardGame</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="titulo_juego">MemoryCardGame</string>
+    <string name="menu_opciones">4x4 Game</string>
+    <string name="menu_opciones2">6x6 Game</string>
+    <string name="menu_opcionesplay">PLAY</string>
+    <string name="title_activity_game">GameActivity</string>
+    <string name="title_activity_ranking">RankingActivity</string>
+</resources>
