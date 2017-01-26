@@ -25,7 +25,7 @@
         android:textColor="#F61B3E"
         tools:fontFamily="casual"
         android:layout_marginBottom="20dp"
-        android:textSize="40dp"/>
+        android:textSize="38dp"/>
 
     <Button
         android:text="@string/menu_opcionesplay"

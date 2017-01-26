@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -25,12 +26,27 @@ public class GameActivity extends AppCompatActivity {
     AlertDialog alerta;
     AlertDialog.Builder yesnoquestion;
 
+    String nombreLogin;
+
+    TextView txvNombreLogin;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_game);
 
         btn4x4 = (Button)findViewById(R.id.btn4x4);
         btn6x6 = (Button)findViewById(R.id.btn6x6);
+
+        txvNombreLogin = (TextView)findViewById(R.id.txtNombreLogin);
+
+        //Creamos un Bundle donde guardar los datos recibidos
+        Bundle recogerNombreLogin = getIntent().getExtras();
+
+        //Obtenemos la cadena
+        nombreLogin = recogerNombreLogin.getString("nombre");
+
+        //Mostramos los datos
+        txvNombreLogin.setText("Bienvenido, " + nombreLogin);
 
         btn4x4.setOnClickListener(new View.OnClickListener() {
             @Override

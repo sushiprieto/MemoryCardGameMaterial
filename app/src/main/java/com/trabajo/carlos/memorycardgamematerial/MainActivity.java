@@ -1,9 +1,13 @@
 package com.trabajo.carlos.memorycardgamematerial;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,11 +18,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Button btnPlay;
+
+    String nombreLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +57,9 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                startActivity(intent);
+                mostrarDialogoPersonalizado();
+
+
 
             }
         });
@@ -88,6 +96,48 @@ public class MainActivity extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Método que crea un cuadro de diálogo personalizado
+     */
+    public void mostrarDialogoPersonalizado() {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialogo_login, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText edtLogin = (EditText) dialogView.findViewById(R.id.edtLogin);
+
+        dialogBuilder.setTitle("Login");
+        dialogBuilder.setMessage("Introduzca su nombre");
+        dialogBuilder.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                //Recogemos el nombre introducido para enviarlo a la otra actividad
+                nombreLogin = edtLogin.getText().toString();
+
+                //do something with edt.getText().toString();
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+
+                intent.putExtra("nombre", nombreLogin);
+
+                startActivity(intent);
+
+            }
+        });
+        dialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+
+                dialog.cancel();
+
+            }
+        });
+
+        AlertDialog dialogo = dialogBuilder.create();
+        dialogo.show();
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
