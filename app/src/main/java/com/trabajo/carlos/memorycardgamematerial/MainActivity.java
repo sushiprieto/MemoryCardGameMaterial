@@ -59,8 +59,6 @@ public class MainActivity extends AppCompatActivity
 
                 mostrarDialogoPersonalizado();
 
-
-
             }
         });
 

@@ -36,7 +36,6 @@ public class MemoryButton4x4 extends Button {
 
         GridLayout.LayoutParams grid = new GridLayout.LayoutParams(GridLayout.spec(fila), GridLayout.spec(columna));
 
-
         //Aqui cambiamos las propiedades del GridLayout
         grid.width = (int)getResources().getDisplayMetrics().density * 50;
         grid.height = (int)getResources().getDisplayMetrics().density * 50;

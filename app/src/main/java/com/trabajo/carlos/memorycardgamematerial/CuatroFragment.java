@@ -1,6 +1,5 @@
 package com.trabajo.carlos.memorycardgamematerial;
 
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -15,12 +14,10 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CuatroFragment extends Fragment {
-
 
     private static final String TAG = CuatroFragment.class.getSimpleName();
 
@@ -122,7 +119,6 @@ public class CuatroFragment extends Fragment {
                         //Este if cada vez que encuentra una pareja deja las imagenes visibles
                         if (selectedButton1.getFrontDrawableId() == button.getFrontDrawableId()) {
 
-
                             //Compruebo si ha ganao el colega
                             ganar++;
                             Log.d(TAG, String.valueOf(ganar));
@@ -166,7 +162,6 @@ public class CuatroFragment extends Fragment {
                             //Este else es por si no encuentra la pareja se le añade un timer para darle la vuelta
                         } else {
 
-
                             selectedButton2 = button;
                             selectedButton2.flip();
                             isBussy = true;
@@ -183,7 +178,6 @@ public class CuatroFragment extends Fragment {
                                     isBussy = false;
                                 }
                             }, 500);
-
 
                         }
 

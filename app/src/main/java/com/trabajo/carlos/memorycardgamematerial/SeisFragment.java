@@ -1,6 +1,5 @@
 package com.trabajo.carlos.memorycardgamematerial;
 
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -146,14 +144,19 @@ public class SeisFragment extends Fragment {
                             //Le mando un mensajito pa que se entere que ha ganado
                             if(ganar == 18){
 
-                                Toast.makeText(getActivity(), "HAS GANAO CABRON", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getActivity(), "HAS GANAO CABRON", Toast.LENGTH_SHORT).show();
 
                                 //Paramos el cronometro y lo metemos en una variable para mostrar el tiempo que ha tardado
                                 cronometrito.stop();
+                                long tiempo = SystemClock.elapsedRealtime() - cronometrito.getBase();
 
-                                long saveTime = SystemClock.elapsedRealtime() - cronometrito.getBase();
-                                int seconds = (int)(saveTime/1000 % 60);
-                                txvCronometro.setText("Has tardado: " + seconds);
+                                long segundos = 0;
+
+                                if (tiempo >= 1000) {
+                                    segundos = tiempo / 1000;
+                                }
+
+                                txvCronometro.setText("Has tardado: " + segundos + " segundos");
 
                             }
 
@@ -177,7 +180,6 @@ public class SeisFragment extends Fragment {
                                     isBussy = false;
                                 }
                             }, 500);
-
 
                         }
 
