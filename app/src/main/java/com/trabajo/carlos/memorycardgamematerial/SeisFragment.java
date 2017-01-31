@@ -22,7 +22,6 @@ import java.util.Random;
  */
 public class SeisFragment extends Fragment {
 
-
     private static final String TAG = CuatroFragment.class.getSimpleName();
 
     private int ganar = 0;
@@ -33,13 +32,13 @@ public class SeisFragment extends Fragment {
 
     private int numberOfElements;
 
-    private MemoryButton[] buttons;
+    private MemoryButton6x6[] buttons;
 
     private int[] buttonGraphicLocation;
     private int[] buttonGraphics;
 
-    private MemoryButton selectedButton1;
-    private MemoryButton selectedButton2;
+    private MemoryButton6x6 selectedButton1;
+    private MemoryButton6x6 selectedButton2;
 
     private boolean isBussy = false;
 
@@ -48,7 +47,6 @@ public class SeisFragment extends Fragment {
     public SeisFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,11 +64,10 @@ public class SeisFragment extends Fragment {
 
         numberOfElements = numColumns * numRows;
 
-        buttons = new MemoryButton[numberOfElements];
+        buttons = new MemoryButton6x6[numberOfElements];
 
         //Cargamos las imagenes
         buttonGraphics = new int[numberOfElements / 2];
-
         buttonGraphics[0] = R.drawable.card1;
         buttonGraphics[1] = R.drawable.card2;
         buttonGraphics[2] = R.drawable.card3;
@@ -98,7 +95,7 @@ public class SeisFragment extends Fragment {
 
             for (int c = 0; c < numColumns; c++){
 
-                MemoryButton tempButton = new MemoryButton(getActivity(), r, c, buttonGraphics[buttonGraphicLocation[r * numColumns + c]]);
+                MemoryButton6x6 tempButton = new MemoryButton6x6(getActivity(), r, c, buttonGraphics[buttonGraphicLocation[r * numColumns + c]]);
                 tempButton.setId(View.generateViewId());
 
                 tempButton.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +108,7 @@ public class SeisFragment extends Fragment {
                         if (isBussy)
                             return;
 
-                        MemoryButton button = (MemoryButton) v;
+                        MemoryButton6x6 button = (MemoryButton6x6) v;
 
                         if (button.isMatched)
                             return;
@@ -146,13 +143,14 @@ public class SeisFragment extends Fragment {
 
                             selectedButton1 = null;
 
-                            //Le mando un mensajito pa que se entere que ha ganao
+                            //Le mando un mensajito pa que se entere que ha ganado
                             if(ganar == 18){
 
                                 Toast.makeText(getActivity(), "HAS GANAO CABRON", Toast.LENGTH_SHORT).show();
 
                                 //Paramos el cronometro y lo metemos en una variable para mostrar el tiempo que ha tardado
                                 cronometrito.stop();
+
                                 long saveTime = SystemClock.elapsedRealtime() - cronometrito.getBase();
                                 int seconds = (int)(saveTime/1000 % 60);
                                 txvCronometro.setText("Has tardado: " + seconds);

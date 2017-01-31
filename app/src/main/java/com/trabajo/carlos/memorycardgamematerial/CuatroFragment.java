@@ -32,13 +32,13 @@ public class CuatroFragment extends Fragment {
 
     TextView txvCronometro;
 
-    private MemoryButton[] buttons;
+    private MemoryButton4x4[] buttons;
 
     private int[] buttonGraphicLocation;
     private int[] buttonGraphics;
 
-    private MemoryButton selectedButton1;
-    private MemoryButton selectedButton2;
+    private MemoryButton4x4 selectedButton1;
+    private MemoryButton4x4 selectedButton2;
 
     private boolean isBussy = false;
 
@@ -65,7 +65,7 @@ public class CuatroFragment extends Fragment {
 
         numberOfElements = numColumns * numRows;
 
-        buttons = new MemoryButton[numberOfElements];
+        buttons = new MemoryButton4x4[numberOfElements];
 
         //Cargamos las imagenes
         buttonGraphics = new int[numberOfElements / 2];
@@ -87,7 +87,7 @@ public class CuatroFragment extends Fragment {
 
             for (int c = 0; c < numColumns; c++) {
 
-                MemoryButton tempButton = new MemoryButton(getActivity(), r, c, buttonGraphics[buttonGraphicLocation[r * numColumns + c]]);
+                MemoryButton4x4 tempButton = new MemoryButton4x4(getActivity(), r, c, buttonGraphics[buttonGraphicLocation[r * numColumns + c]]);
                 tempButton.setId(View.generateViewId());
 
                 tempButton.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +100,7 @@ public class CuatroFragment extends Fragment {
                         if (isBussy)
                             return;
 
-                        MemoryButton button = (MemoryButton) v;
+                        MemoryButton4x4 button = (MemoryButton4x4) v;
 
                         if (button.isMatched)
                             return;
@@ -137,7 +137,7 @@ public class CuatroFragment extends Fragment {
 
                             selectedButton1 = null;
 
-                            //Le mando un mensajito pa que se entere que ha ganao
+                            //Le mando un mensajito pa que se entere que ha ganado
                             if (ganar == 8) {
 
                                 //Toast.makeText(getActivity(), "HAS GANAO CABRON", Toast.LENGTH_SHORT).show();

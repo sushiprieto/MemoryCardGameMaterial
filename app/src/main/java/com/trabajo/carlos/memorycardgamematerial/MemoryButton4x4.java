@@ -10,7 +10,7 @@ import android.widget.GridLayout;
  * Created by Carlos Prieto on 25/01/2017.
  */
 
-public class MemoryButton extends Button {
+public class MemoryButton4x4 extends Button {
 
     protected int fila;
     protected int columna;
@@ -22,7 +22,7 @@ public class MemoryButton extends Button {
     protected Drawable front;
     protected Drawable back;
 
-    public MemoryButton(Context context, int fila, int columna, int frontImageDrawableId) {
+    public MemoryButton4x4(Context context, int fila, int columna, int frontImageDrawableId) {
         super(context);
 
         fila = fila;
@@ -34,14 +34,16 @@ public class MemoryButton extends Button {
 
         setBackground(back);
 
-        GridLayout.LayoutParams tempParams = new GridLayout.LayoutParams(GridLayout.spec(fila), GridLayout.spec(columna));
+        GridLayout.LayoutParams grid = new GridLayout.LayoutParams(GridLayout.spec(fila), GridLayout.spec(columna));
 
-        tempParams.width = (int)getResources().getDisplayMetrics().density * 50;
-        tempParams.height = (int)getResources().getDisplayMetrics().density * 50;
-        tempParams.bottomMargin = (int)getResources().getDisplayMetrics().density * 10;
-        tempParams.rightMargin = (int)getResources().getDisplayMetrics().density * 10;
 
-        setLayoutParams(tempParams);
+        //Aqui cambiamos las propiedades del GridLayout
+        grid.width = (int)getResources().getDisplayMetrics().density * 50;
+        grid.height = (int)getResources().getDisplayMetrics().density * 50;
+        grid.bottomMargin = (int)getResources().getDisplayMetrics().density * 10;
+        grid.rightMargin = (int)getResources().getDisplayMetrics().density * 10;
+
+        setLayoutParams(grid);
 
     }
 
@@ -57,6 +59,9 @@ public class MemoryButton extends Button {
         return frontDrawableId;
     }
 
+    /**
+     * Metodo para voltear la carta
+     */
     public void flip(){
 
         if (isMatched){
