@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -115,6 +116,21 @@ public class MainActivity extends AppCompatActivity
 
                 //Recogemos el nombre introducido para enviarlo a la otra actividad
                 nombreLogin = edtLogin.getText().toString();
+
+
+
+
+
+                //Definimos un tiempo por defecto
+                //String tiempo = "0";
+
+                //Lo insertamos en la BBDD
+                LoginSQLHelper DDBB = new LoginSQLHelper(getApplicationContext(), null, null, 1);
+                String mensaje = DDBB.insertar(nombreLogin, null);
+                Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
+
+
+
 
                 //do something with edt.getText().toString();
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);

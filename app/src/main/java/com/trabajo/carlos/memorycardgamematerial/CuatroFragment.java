@@ -1,5 +1,6 @@
 package com.trabajo.carlos.memorycardgamematerial;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Chronometer;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -40,6 +42,8 @@ public class CuatroFragment extends Fragment {
     private boolean isBussy = false;
 
     GridLayout gridJuego;
+
+    private SQLiteDatabase db;
 
     public CuatroFragment() {
         // Required empty public constructor
@@ -154,6 +158,18 @@ public class CuatroFragment extends Fragment {
 
                                 //int seconds = (int)(saveTime/1000 % 60);
                                 txvCronometro.setText("Has tardado: " + segundos + " segundos");
+
+                                String resultado = String.valueOf(segundos);
+
+
+                                /**ToDo: EL NOMBRE SE QUEDA EN NULO ASI QUE HAY QUE ARREGLARLO */
+                                //Lo insertamos en la BBDD
+                                LoginSQLHelper DDBB = new LoginSQLHelper(getActivity().getApplicationContext(), null, null, 1);
+                                //String mensaje = DDBB.insertar(null, resultado);
+                                String mensaje = DDBB.insertar(null, resultado);
+                                Toast.makeText(getActivity().getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
+
+
 
                             }
 
