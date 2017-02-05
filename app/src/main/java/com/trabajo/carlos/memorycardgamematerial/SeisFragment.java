@@ -144,12 +144,9 @@ public class SeisFragment extends Fragment {
                             //Le mando un mensajito pa que se entere que ha ganado
                             if(ganar == 18){
 
-                                //Toast.makeText(getActivity(), "HAS GANAO CABRON", Toast.LENGTH_SHORT).show();
-
                                 //Paramos el cronometro y lo metemos en una variable para mostrar el tiempo que ha tardado
                                 cronometrito.stop();
                                 long tiempo = SystemClock.elapsedRealtime() - cronometrito.getBase();
-
                                 long segundos = 0;
 
                                 if (tiempo >= 1000) {

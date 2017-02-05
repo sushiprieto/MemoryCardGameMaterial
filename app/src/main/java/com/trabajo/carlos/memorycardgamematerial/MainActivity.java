@@ -35,15 +35,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -114,14 +105,23 @@ public class MainActivity extends AppCompatActivity
         dialogBuilder.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
 
-                //Recogemos el nombre introducido para enviarlo a la otra actividad
-                nombreLogin = edtLogin.getText().toString();
+                //Comprobamos que no se inserte el campo vacio
+                if (edtLogin.getText().toString().equals("")){
 
-                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                    Toast.makeText(getApplicationContext(), "Debe insertar un nombre", Toast.LENGTH_SHORT).show();
 
-                intent.putExtra("nombre", nombreLogin);
+                }else{
 
-                startActivity(intent);
+                    //Recogemos el nombre introducido para enviarlo a la otra actividad
+                    nombreLogin = edtLogin.getText().toString();
+
+                    Intent intent = new Intent(MainActivity.this, GameActivity.class);
+
+                    intent.putExtra("nombre", nombreLogin);
+
+                    startActivity(intent);
+
+                }
 
             }
         });
@@ -144,12 +144,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_juego) {
-
-            Intent intent = new Intent(MainActivity.this, GameActivity.class);
-            startActivity(intent);
-
-        } else if (id == R.id.nav_ranking) {
+        if (id == R.id.nav_ranking) {
 
             Intent intent = new Intent(MainActivity.this, RankingActivity.class);
             startActivity(intent);

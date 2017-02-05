@@ -15,19 +15,19 @@ import java.util.ArrayList;
 
 public class LoginSQLHelper extends SQLiteOpenHelper {
 
-    static final String COLUMN_ID = "id";
     static final String COLUMN_NOMBRE = "nombre";
     static final String COLUMN_TIEMPO = "tiempo";
     static final String DB_NAME = "ranking.db";
     static final String TABLE_NAME = "personas";
+    private static final int DATABASE_VERSION = 2;
 
     //Sentencia SQL para crear la tabla de Nombres
-    String sqlCreate = "CREATE TABLE " + TABLE_NAME + " (" + COLUMN_NOMBRE + " TEXT, " + COLUMN_TIEMPO + " TEXT";
+    String sqlCreate = "CREATE TABLE " + TABLE_NAME + "(" + COLUMN_NOMBRE + " TEXT, " + COLUMN_TIEMPO + " TEXT";
 
     //String sqlCreate = "CREATE TABLE personas(nombre TEXT, tiempo TEXT)";
 
     public LoginSQLHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, "personas", factory, 1);
+        super(context, TABLE_NAME, factory, DATABASE_VERSION);
     }
 
     @Override
@@ -49,18 +49,24 @@ public class LoginSQLHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Método para insertar campos en la BBDD
+     * @param nombre
+     * @param tiempo
+     * @return
+     */
     public String insertar(String nombre, String tiempo){
 
         String mensaje = "";
 
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contenedor = new ContentValues();
-        contenedor.put("nombre", nombre);
-        contenedor.put("tiempo", tiempo);
+        contenedor.put(COLUMN_NOMBRE, nombre);
+        contenedor.put(COLUMN_TIEMPO, tiempo);
 
         try {
 
-            database.insertOrThrow("personas", null, contenedor);
+            database.insertOrThrow(TABLE_NAME, null, contenedor);
             mensaje="Ingresado Correctamente";
 
         }catch (SQLException e){
@@ -75,19 +81,23 @@ public class LoginSQLHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Método para rellenar el ListView con los valores introducidos
+     * @return
+     */
     public ArrayList llenarLista(){
 
         ArrayList<String> lista = new ArrayList<>();
         SQLiteDatabase database = this.getWritableDatabase();
 
-        String select = "SELECT * FROM personas";
+        String select = "SELECT * FROM " + TABLE_NAME;
         Cursor registros = database.rawQuery(select, null);
 
         if(registros.moveToFirst()){
 
             do{
 
-                lista.add("Nombre: " + registros.getString(0) + " Tiempo: " + registros.getString(1));
+                lista.add("Nombre: " + registros.getString(0) + " Tiempo: " + registros.getString(1) + " segundos");
 
             }while(registros.moveToNext());
 
@@ -97,6 +107,31 @@ public class LoginSQLHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Método que limpia los datos de la tabla
+     * @return
+     */
+    public String limpiarRegistros(){
 
+        String mensaje ="";
+
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        int cantidad =database.delete(TABLE_NAME, null, null);
+
+        if (cantidad !=0){
+
+            mensaje="Eliminado Correctamente";
+
+        }
+        else{
+
+            mensaje = "No existe";
+        }
+
+        database.close();
+        return mensaje;
+
+    }
 
 }

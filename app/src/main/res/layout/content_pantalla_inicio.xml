@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textColor="#F61B3E"
-        android:textSize="38dp"
+        android:textSize="38sp"
         android:id="@+id/textView2"
         android:layout_centerHorizontal="true"
         tools:fontFamily="casual" />

@@ -43,8 +43,6 @@ public class CuatroFragment extends Fragment {
 
     GridLayout gridJuego;
 
-    private SQLiteDatabase db;
-
     public CuatroFragment() {
         // Required empty public constructor
     }
@@ -140,16 +138,9 @@ public class CuatroFragment extends Fragment {
                             //Le mando un mensajito pa que se entere que ha ganado
                             if (ganar == 8) {
 
-                                //Toast.makeText(getActivity(), "HAS GANAO CABRON", Toast.LENGTH_SHORT).show();
-
                                 //Paramos el cronometro y lo metemos en una variable para mostrar el tiempo que ha tardado
                                 cronometrito.stop();
                                 long tiempo = SystemClock.elapsedRealtime() - cronometrito.getBase();
-
-                                //int hours = (int) (tiempo / 3600000);
-                                //int minutes = (int) (tiempo - hours * 3600000) / 60000;
-                                //int seconds = (int) (tiempo - hours * 3600000 - minutes * 60000) / 1000;
-
                                 long segundos = 0;
 
                                 if (tiempo >= 1000) {

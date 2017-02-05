@@ -30,8 +30,6 @@ public class GameActivity extends AppCompatActivity {
 
     TextView txvNombreLogin;
 
-
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_game);
@@ -46,7 +44,6 @@ public class GameActivity extends AppCompatActivity {
 
         //Obtenemos la cadena
         nombreLogin = recogerNombreLogin.getString("nombre");
-        int tiempo = 0;
 
         //Mostramos los datos
         txvNombreLogin.setText("Bienvenido, " + nombreLogin);
