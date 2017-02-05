@@ -15,16 +15,16 @@ import java.util.ArrayList;
 
 public class LoginSQLHelper extends SQLiteOpenHelper {
 
-    //static final String COLUMN_ID = "id";
-    //static final String COLUMN_NOMBRE = "nombre";
-    //static final String COLUMN_TIEMPO = "tiempo";
-    //static final String DB_NAME = "ranking.db";
-    //static final String TABLE_NAME = "personas";
+    static final String COLUMN_ID = "id";
+    static final String COLUMN_NOMBRE = "nombre";
+    static final String COLUMN_TIEMPO = "tiempo";
+    static final String DB_NAME = "ranking.db";
+    static final String TABLE_NAME = "personas";
 
     //Sentencia SQL para crear la tabla de Nombres
-    //String sqlCreate = "CREATE TABLE " + TABLE_NAME + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NOMBRE + " TEXT, " + COLUMN_TIEMPO + " INTEGER";
+    String sqlCreate = "CREATE TABLE " + TABLE_NAME + " (" + COLUMN_NOMBRE + " TEXT, " + COLUMN_TIEMPO + " TEXT";
 
-    String sqlCreate = "CREATE TABLE personas(nombre TEXT, tiempo TEXT)";
+    //String sqlCreate = "CREATE TABLE personas(nombre TEXT, tiempo TEXT)";
 
     public LoginSQLHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, "personas", factory, 1);
@@ -55,7 +55,7 @@ public class LoginSQLHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues contenedor = new ContentValues();
-        contenedor.put("nombre",nombre);
+        contenedor.put("nombre", nombre);
         contenedor.put("tiempo", tiempo);
 
         try {
@@ -75,39 +75,6 @@ public class LoginSQLHelper extends SQLiteOpenHelper {
 
     }
 
-    /**
-     * ToDO: PROBLEMA
-     * @param Nombre
-     * @param tiempo
-     * @return
-     */
-    public String actualizar(String Nombre,String tiempo){
-
-        String Mensaje = "";
-
-        SQLiteDatabase database = this.getWritableDatabase();
-        ContentValues contenedor = new ContentValues();
-        contenedor.put("nombre",Nombre);
-        contenedor.put("tiempo",tiempo);
-
-        int cantidad = database.update("personas", contenedor, "nombre=" + Nombre, null);
-
-        if(cantidad!=0){
-
-            Mensaje="Actualizado Correctamente";
-
-        }else{
-
-            Mensaje="No Actualizado";
-
-        }
-
-        database.close();
-
-        return Mensaje;
-
-    }
-
     public ArrayList llenarLista(){
 
         ArrayList<String> lista = new ArrayList<>();
@@ -120,7 +87,7 @@ public class LoginSQLHelper extends SQLiteOpenHelper {
 
             do{
 
-                lista.add(registros.getString(0) + " " + registros.getString(1));
+                lista.add("Nombre: " + registros.getString(0) + " Tiempo: " + registros.getString(1));
 
             }while(registros.moveToNext());
 

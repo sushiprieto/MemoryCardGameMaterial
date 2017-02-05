@@ -159,17 +159,19 @@ public class CuatroFragment extends Fragment {
                                 //int seconds = (int)(saveTime/1000 % 60);
                                 txvCronometro.setText("Has tardado: " + segundos + " segundos");
 
+                                //Casteamos a String los segundos
                                 String resultado = String.valueOf(segundos);
 
+                                //Creamos un Bundle para recoger el nombre que ingresamos en el MainActivity
+                                Bundle recogerNombreLogin = getActivity().getIntent().getExtras();
+                                String nombreLogin = recogerNombreLogin.getString("nombre");
 
-                                /**ToDo: EL NOMBRE SE QUEDA EN NULO ASI QUE HAY QUE ARREGLARLO */
                                 //Lo insertamos en la BBDD
                                 LoginSQLHelper DDBB = new LoginSQLHelper(getActivity().getApplicationContext(), null, null, 1);
-                                //String mensaje = DDBB.insertar(null, resultado);
-                                String mensaje = DDBB.insertar(null, resultado);
+                                String mensaje = DDBB.insertar(nombreLogin, resultado);
+
+                                //Mostramos mensaje de confirmacion
                                 Toast.makeText(getActivity().getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
-
-
 
                             }
 

@@ -158,6 +158,20 @@ public class SeisFragment extends Fragment {
 
                                 txvCronometro.setText("Has tardado: " + segundos + " segundos");
 
+                                //Casteamos a String los segundos
+                                String resultado = String.valueOf(segundos);
+
+                                //Creamos un Bundle para recoger el nombre que ingresamos en el MainActivity
+                                Bundle recogerNombreLogin = getActivity().getIntent().getExtras();
+                                String nombreLogin = recogerNombreLogin.getString("nombre");
+
+                                //Lo insertamos en la BBDD
+                                LoginSQLHelper DDBB = new LoginSQLHelper(getActivity().getApplicationContext(), null, null, 1);
+                                String mensaje = DDBB.insertar(nombreLogin, resultado);
+
+                                //Mostramos mensaje de confirmacion
+                                Toast.makeText(getActivity().getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
+
                             }
 
                             return;
