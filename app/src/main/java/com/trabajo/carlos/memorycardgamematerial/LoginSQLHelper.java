@@ -19,10 +19,10 @@ public class LoginSQLHelper extends SQLiteOpenHelper {
     static final String COLUMN_TIEMPO = "tiempo";
     static final String DB_NAME = "ranking.db";
     static final String TABLE_NAME = "personas";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
 
     //Sentencia SQL para crear la tabla de Nombres
-    String sqlCreate = "CREATE TABLE " + TABLE_NAME + "(" + COLUMN_NOMBRE + " TEXT, " + COLUMN_TIEMPO + " TEXT";
+    String sqlCreate = "CREATE TABLE " + TABLE_NAME + "(" + COLUMN_NOMBRE + " TEXT, " + COLUMN_TIEMPO + " TEXT)";
 
     //String sqlCreate = "CREATE TABLE personas(nombre TEXT, tiempo TEXT)";
 
@@ -42,7 +42,7 @@ public class LoginSQLHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         //Se elimina la versión anterior de la tabla
-        db.execSQL("DROP TABLE IF EXISTS personas");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 
         //Se crea la nueva versión de la tabla
         db.execSQL(sqlCreate);

@@ -46,7 +46,7 @@ public class GameActivity extends AppCompatActivity {
         nombreLogin = recogerNombreLogin.getString("nombre");
 
         //Mostramos los datos
-        txvNombreLogin.setText("Bienvenido, " + nombreLogin);
+        txvNombreLogin.setText("Bienvenid@, " + nombreLogin);
 
         btn4x4.setOnClickListener(new View.OnClickListener() {
             @Override

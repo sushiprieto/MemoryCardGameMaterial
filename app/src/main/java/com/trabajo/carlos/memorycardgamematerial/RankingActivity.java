@@ -22,7 +22,7 @@ public class RankingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_ranking);
 
-        lsv_lista = (ListView)findViewById(R.id.lista);
+        lsv_lista = (ListView)findViewById(R.id.lsvLista);
 
         final LoginSQLHelper DDBB = new LoginSQLHelper(getApplicationContext(), null, null, 1);
 
@@ -37,9 +37,19 @@ public class RankingActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 DDBB.limpiarRegistros();
+                recargar();
 
             }
         });
+
+    }
+
+    /**
+     * Metodo para recargar la misma actividad
+     */
+    public void recargar(){
+
+        this.recreate();
 
     }
 
