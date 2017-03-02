@@ -13,7 +13,7 @@ import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.trabajo.carlos.memorycardgamematerial.bbdd.LoginSQLHelper;
+import com.trabajo.carlos.memorycardgamematerial.bbdd.DBAdapter;
 import com.trabajo.carlos.memorycardgamematerial.utilidades.MemoryButton6x6;
 import com.trabajo.carlos.memorycardgamematerial.R;
 
@@ -30,7 +30,7 @@ public class SeisFragment extends Fragment {
 
     private Chronometer cronometrito;
 
-    TextView txvCronometro;
+    private TextView txvCronometro;
 
     private int numberOfElements;
 
@@ -44,7 +44,7 @@ public class SeisFragment extends Fragment {
 
     private boolean isBussy = false;
 
-    GridLayout gridJuego;
+    private GridLayout gridJuego;
 
     public SeisFragment() {
         // Required empty public constructor
@@ -166,12 +166,11 @@ public class SeisFragment extends Fragment {
                                 Bundle recogerNombreLogin = getActivity().getIntent().getExtras();
                                 String nombreLogin = recogerNombreLogin.getString("nombre");
 
-                                //Lo insertamos en la BBDD
-                                LoginSQLHelper DDBB = new LoginSQLHelper(getActivity().getApplicationContext(), null, null, 1);
-                                String mensaje = DDBB.insertar(nombreLogin, resultado);
+                                //Instanciamos la dificultad
+                                String dificultad = "DIFÍCIL";
 
-                                //Mostramos mensaje de confirmacion
-                                Toast.makeText(getActivity().getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
+                                //Insertamos en la bbdd el nombre y el resultado
+                                save(nombreLogin, resultado, dificultad);
 
                             }
 
@@ -200,6 +199,7 @@ public class SeisFragment extends Fragment {
 
                     }
                 });
+
                 buttons[r * numColumns + c] = tempButton;
                 gridJuego.addView(tempButton);
 
@@ -210,6 +210,36 @@ public class SeisFragment extends Fragment {
         return v;
     }
 
+    /**
+     * Metodo que guarda el nombre y el tiempo
+     * @param name
+     * @param time
+     */
+    private void save(String name, String time, String dificultad)
+    {
+
+        DBAdapter db = new DBAdapter(getActivity());
+        db.openDB();
+
+        boolean saved = db.add(name, time, dificultad);
+
+        //Si se ha guardado bien
+        if(saved)
+        {
+
+            Toast.makeText(getActivity(), "Insertado correctamente", Toast.LENGTH_SHORT).show();
+
+        }else {
+
+            Toast.makeText(getActivity(), "No se puede guardar", Toast.LENGTH_SHORT).show();
+
+        }
+
+    }
+
+    /**
+     * Metodo que genera el random donde aparecen las imagenes
+     */
     protected void shuffleButtonGraphics(){
 
         Random rand = new Random();

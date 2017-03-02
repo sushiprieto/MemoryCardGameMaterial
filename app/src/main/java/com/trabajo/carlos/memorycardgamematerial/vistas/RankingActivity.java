@@ -1,50 +1,115 @@
 package com.trabajo.carlos.memorycardgamematerial.vistas;
 
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.trabajo.carlos.memorycardgamematerial.bbdd.LoginSQLHelper;
 import com.trabajo.carlos.memorycardgamematerial.R;
+import com.trabajo.carlos.memorycardgamematerial.bbdd.DBAdapter;
+import com.trabajo.carlos.memorycardgamematerial.datos.Persona;
+import com.trabajo.carlos.memorycardgamematerial.listas.CustomAdapter;
 
 import java.util.ArrayList;
 
 public class RankingActivity extends AppCompatActivity {
 
-    ListView lsv_lista;
-    ArrayList<String> lista;
-    ArrayAdapter adaptador;
+    private ListView lsvLista;
+    private ArrayList<Persona> personas = new ArrayList<>();
+    private CustomAdapter adapter;
 
-    Button btnLimpiar;
+    private Button btnLimpiar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_ranking);
 
-        lsv_lista = (ListView)findViewById(R.id.lsvLista);
-
-        final LoginSQLHelper DDBB = new LoginSQLHelper(getApplicationContext(), null, null, 1);
-
-        lista = DDBB.llenarLista();
-
-        adaptador = new ArrayAdapter(this, android.R.layout.simple_list_item_1, lista);
-        lsv_lista.setAdapter(adaptador);
+        lsvLista = (ListView)findViewById(R.id.lsvLista);
 
         btnLimpiar = (Button)findViewById(R.id.btnLimpiar);
+
         btnLimpiar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                DDBB.limpiarRegistros();
-                recargar();
+                limpiarRegistros();
 
             }
         });
 
+        //Inicializamos el adapter de la lista
+        adapter = new CustomAdapter(this, personas);
+
+        this.getPersonas();
+
+    }
+
+    /**
+     * Metodo donde obtenemos todos los nombres y tiempos de la BBDD
+     */
+    private void getPersonas()
+    {
+
+        personas.clear();
+        DBAdapter db = new DBAdapter(this);
+        db.openDB();
+
+        Cursor c = db.retrieve();
+        Persona persona = null;
+
+        //Va recorriendo el cursor en busca de datos
+        while (c.moveToNext())
+        {
+
+            int id = c.getInt(0);
+            String name = c.getString(1);
+            String time = c.getString(2);
+            String dificultad = c.getString(3);
+
+            persona = new Persona();
+            persona.setId(id);
+            persona.setNombre(name);
+            persona.setTiempo(time);
+            persona.setDificultad(dificultad);
+
+            personas.add(persona);
+
+        }
+
+        db.closeDB();
+
+        //Añadimos a la lista
+        lsvLista.setAdapter(adapter);
+
+    }
+
+    /**
+     * Metodo que borra un nombre de la BBDD
+     */
+    private void limpiarRegistros()
+    {
+
+        DBAdapter db = new DBAdapter(this);
+        db.openDB();
+
+        boolean deleted = db.limpiarRegistros();
+        db.closeDB();
+
+        //Si se ha borrado bien
+        if(deleted)
+        {
+
+            getPersonas();
+
+        }else {
+
+            Toast.makeText(this, "No se puede borrar", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     /**
