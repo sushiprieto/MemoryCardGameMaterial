@@ -5,21 +5,15 @@
         <item
             android:id="@+id/nav_ranking"
             android:icon="@drawable/ic_insert_chart_black_24dp"
-            android:title="Ranking" />
-
+            android:title="@string/title_activity_ranking" />
+        <item
+            android:id="@+id/nav_contacto"
+            android:icon="@drawable/ic_menu_share"
+            android:title="@string/title_activity_contacto" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/title_activity_about" />
     </group>
-
-    <item android:title="Comunicacion">
-        <menu>
-            <item
-                android:id="@+id/nav_compartir"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Compartir" />
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/ic_menu_send"
-                android:title="About" />
-        </menu>
-    </item>
 
 </menu>

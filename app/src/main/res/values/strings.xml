@@ -1,16 +1,31 @@
 <resources>
-    <string name="app_name">MemoryCardGame</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
+    <!--Chronometer-->
     <string name="croConometro">Cronometro</string>
-    <string name="titulo_juego">MemoryCardGame</string>
+
+    <!--Menus-->
     <string name="menu_opciones">4x4 Game</string>
     <string name="menu_opciones2">6x6 Game</string>
-    <string name="menu_opcionesplay">PLAY</string>
-    <string name="title_activity_game">GameActivity</string>
-    <string name="title_activity_ranking">RankingActivity</string>
+
+    <!--Titles-->
+    <string name="app_name">MemoryCardGame</string>
+    <string name="title_activity_game">Juego</string>
+    <string name="title_activity_ranking">Ranking Personal</string>
+    <string name="title_activity_about">Sobre mi</string>
+    <string name="title_activity_contacto">Contacto</string>
+    <string name="title_ranking">Ranking personal</string>
+
+    <!--TextViews-->
+    <string name="txvAbout">©Copyright: Carlos Prieto \n I.E.S Nervion \n 2016/2017 \n designed by Carlos Prieto from Flaticon</string>
+    <string name="txvTwitter">Follow on Twitter</string>
+    <string name="txvFacebook">Follow on Facebook</string>
+    <string name="txvInstagram">Follow on Instagram</string>
+
+    <!--Buttons-->
     <string name="btnResetLista">Reiniciar lista</string>
+    <string name="btnPlay">JUGAR</string>
+
 </resources>
