@@ -1,6 +1,7 @@
 package com.trabajo.carlos.memorycardgamematerial.vistas;
 
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -34,6 +35,8 @@ public class GameActivity extends AppCompatActivity {
 
     TextView txvNombreLogin;
 
+    private MediaPlayer musica;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_game);
@@ -43,6 +46,11 @@ public class GameActivity extends AppCompatActivity {
 
         txvNombreLogin = (TextView)findViewById(R.id.txtNombreLogin);
 
+        //Creamos la musica de fondo y la ponemos en bucle
+        musica = MediaPlayer.create(this, R.raw.musica);
+        musica.start();
+        musica.setLooping(true);
+
         //Creamos un Bundle donde guardar los datos recibidos
         Bundle recogerNombreLogin = getIntent().getExtras();
 
@@ -50,7 +58,7 @@ public class GameActivity extends AppCompatActivity {
         nombreLogin = recogerNombreLogin.getString("nombre");
 
         //Mostramos los datos
-        txvNombreLogin.setText("Bienvenid@, " + nombreLogin);
+        txvNombreLogin.setText("Bienvenid@\n" + nombreLogin);
 
         btn4x4.setOnClickListener(new View.OnClickListener() {
             @Override

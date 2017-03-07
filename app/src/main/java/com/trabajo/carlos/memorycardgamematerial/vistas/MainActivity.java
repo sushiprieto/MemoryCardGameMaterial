@@ -3,6 +3,7 @@ package com.trabajo.carlos.memorycardgamematerial.vistas;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private String nombreLogin;
 
+    private MediaPlayer musica;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Creamos la musica de fondo y la ponemos en bucle
+        musica = MediaPlayer.create(this, R.raw.musica);
+        musica.start();
+        musica.setLooping(true);
 
         btnPlay = (Button)findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(new View.OnClickListener() {
@@ -139,5 +147,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    //Cuando se cierra la app se para la musica
+    @Override
+    protected void onPause() {
+        super.onPause();
+        musica.release();
     }
 }

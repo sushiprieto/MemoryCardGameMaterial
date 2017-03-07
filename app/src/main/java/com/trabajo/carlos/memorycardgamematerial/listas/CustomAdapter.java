@@ -59,8 +59,8 @@ public class CustomAdapter extends BaseAdapter {
 
         //Bindeamos los datos
         CustomViewHolder holder = new CustomViewHolder(convertView);
-        holder.txvNombre.setText("Nombre: " + personas.get(position).getNombre());
-        holder.txvTiempo.setText("Tiempo: " + personas.get(position).getTiempo());
+        holder.txvNombre.setText(personas.get(position).getNombre());
+        holder.txvTiempo.setText(personas.get(position).getTiempo() + "s");
         holder.txvDificultad.setText(personas.get(position).getDificultad());
 
         return convertView;

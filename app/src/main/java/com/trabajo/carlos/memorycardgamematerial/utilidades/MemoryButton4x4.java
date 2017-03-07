@@ -32,7 +32,7 @@ public class MemoryButton4x4 extends Button {
         frontDrawableId = frontImageDrawableId;
 
         front = AppCompatDrawableManager.get().getDrawable(context, frontImageDrawableId);
-        back = AppCompatDrawableManager.get().getDrawable(context, R.drawable.img_dorso);
+        back = AppCompatDrawableManager.get().getDrawable(context, R.drawable.poker);
 
         setBackground(back);
 
