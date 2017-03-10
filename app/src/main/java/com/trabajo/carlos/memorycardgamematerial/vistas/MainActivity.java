@@ -16,17 +16,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.trabajo.carlos.memorycardgamematerial.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Button btnPlay;
+    private ImageButton btnPlay;
 
     private String nombreLogin;
 
-    private MediaPlayer musica;
+    //private MediaPlayer musica;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +46,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         //Creamos la musica de fondo y la ponemos en bucle
-        musica = MediaPlayer.create(this, R.raw.musica);
+        /**musica = MediaPlayer.create(this, R.raw.musica);
         musica.start();
-        musica.setLooping(true);
+        musica.setLooping(true);**/
 
-        btnPlay = (Button)findViewById(R.id.btnPlay);
+        btnPlay = (ImageButton)findViewById(R.id.btnPlay);
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,6 +154,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onPause() {
         super.onPause();
-        musica.release();
+        //musica.release();
     }
 }
