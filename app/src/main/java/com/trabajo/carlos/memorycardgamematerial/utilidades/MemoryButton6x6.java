@@ -27,8 +27,6 @@ public class MemoryButton6x6 extends android.support.v7.widget.AppCompatButton {
     public MemoryButton6x6(Context context, int fila, int columna, int frontImageDrawableId) {
         super(context);
 
-        fila = fila;
-        columna = columna;
         frontDrawableId = frontImageDrawableId;
 
         front = AppCompatDrawableManager.get().getDrawable(context, frontImageDrawableId);
@@ -46,10 +44,6 @@ public class MemoryButton6x6 extends android.support.v7.widget.AppCompatButton {
 
         setLayoutParams(grid);
 
-    }
-
-    public boolean isMatched() {
-        return isMatched;
     }
 
     public void setMatched(boolean matched) {

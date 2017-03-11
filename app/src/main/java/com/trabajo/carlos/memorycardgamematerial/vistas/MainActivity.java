@@ -29,10 +29,6 @@ import com.trabajo.carlos.memorycardgamematerial.fragments.RankingFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    //private ImageButton btnPlay;
-
-    //private String nombreLogin;
-
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
@@ -48,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private final String tagfabout = "fabout";
     private final String tagfcontact = "fcontact";
 
-    //private MediaPlayer musica;
+    private MediaPlayer musica;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +68,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.contenedor_fragment, fmain, tagfmain);
         fragmentTransaction.commit();
+
+        musica = MediaPlayer.create(this, R.raw.musica);
+        musica.start();
+        musica.setLooping(true);
 
     }
 

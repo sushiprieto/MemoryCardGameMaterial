@@ -35,8 +35,6 @@ public class GameActivity extends AppCompatActivity {
 
     TextView txvNombreLogin;
 
-    //private MediaPlayer musica;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_game);
@@ -45,11 +43,6 @@ public class GameActivity extends AppCompatActivity {
         btn6x6 = (Button)findViewById(R.id.btn6x6);
 
         txvNombreLogin = (TextView)findViewById(R.id.txtNombreLogin);
-
-        //Creamos la musica de fondo y la ponemos en bucle
-        /**musica = MediaPlayer.create(this, R.raw.musica);
-        musica.start();
-        musica.setLooping(true);**/
 
         //Creamos un Bundle donde guardar los datos recibidos
         Bundle recogerNombreLogin = getIntent().getExtras();
