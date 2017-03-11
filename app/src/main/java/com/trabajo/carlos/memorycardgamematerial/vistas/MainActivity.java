@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -20,12 +22,31 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.trabajo.carlos.memorycardgamematerial.R;
+import com.trabajo.carlos.memorycardgamematerial.fragments.AboutFragment;
+import com.trabajo.carlos.memorycardgamematerial.fragments.ContactFragment;
+import com.trabajo.carlos.memorycardgamematerial.fragments.MainFragment;
+import com.trabajo.carlos.memorycardgamematerial.fragments.RankingFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ImageButton btnPlay;
+    //private ImageButton btnPlay;
 
-    private String nombreLogin;
+    //private String nombreLogin;
+
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+
+    //Creamos los fragments
+    private MainFragment fmain = new MainFragment();
+    private RankingFragment franking = new RankingFragment();
+    private AboutFragment fabout = new AboutFragment();
+    private ContactFragment fcontact = new ContactFragment();
+
+    //Creamos los tags para los fragments
+    private final String tagfmain = "fmain";
+    private final String tagfranking = "franking";
+    private final String tagfabout = "fabout";
+    private final String tagfcontact = "fcontact";
 
     //private MediaPlayer musica;
 
@@ -45,20 +66,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //Creamos la musica de fondo y la ponemos en bucle
-        /**musica = MediaPlayer.create(this, R.raw.musica);
-        musica.start();
-        musica.setLooping(true);**/
-
-        btnPlay = (ImageButton)findViewById(R.id.btnPlay);
-        btnPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                mostrarDialogoPersonalizado();
-
-            }
-        });
+        //Instanciamos el MainFragment para que aparezca en esta activity por defecto
+        //Inicializamos
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.contenedor_fragment, fmain, tagfmain);
+        fragmentTransaction.commit();
 
     }
 
@@ -72,76 +85,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    /**
-     * Método que crea un cuadro de diálogo personalizado
-     */
-    public void mostrarDialogoPersonalizado() {
-
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = this.getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.dialogo_login, null);
-        dialogBuilder.setView(dialogView);
-
-        final EditText edtLogin = (EditText) dialogView.findViewById(R.id.edtLogin);
-
-        dialogBuilder.setTitle("Login");
-        dialogBuilder.setMessage("Introduzca su nombre");
-        dialogBuilder.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-
-                //Comprobamos que no se inserte el campo vacio
-                if (edtLogin.getText().toString().equals("")){
-
-                    Toast.makeText(getApplicationContext(), "Debe insertar un nombre", Toast.LENGTH_SHORT).show();
-
-                }else{
-
-                    //Recogemos el nombre introducido para enviarlo a la otra actividad
-                    nombreLogin = edtLogin.getText().toString();
-
-                    Intent intent = new Intent(MainActivity.this, GameActivity.class);
-
-                    intent.putExtra("nombre", nombreLogin);
-
-                    startActivity(intent);
-
-                }
-
-            }
-        });
-        dialogBuilder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-
-                dialog.cancel();
-
-            }
-        });
-
-        AlertDialog dialogo = dialogBuilder.create();
-        dialogo.show();
-
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_ranking) {
+        //Inicializamos
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
 
-            Intent intent = new Intent(MainActivity.this, RankingActivity.class);
-            startActivity(intent);
+        if (id == R.id.nav_play) {
+
+            fragmentTransaction.replace(R.id.contenedor_fragment, fmain, tagfmain);
+            fragmentTransaction.commit();
+
+        } else if (id == R.id.nav_ranking) {
+
+            fragmentTransaction.replace(R.id.contenedor_fragment, franking, tagfranking);
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_contacto) {
 
-            Intent intent = new Intent(MainActivity.this, ContactoActivity.class);
-            startActivity(intent);
+            fragmentTransaction.replace(R.id.contenedor_fragment, fcontact, tagfcontact);
+            fragmentTransaction.commit();
 
         } else if (id == R.id.nav_about) {
 
-            Intent intent = new Intent(MainActivity.this, AboutActivity.class);
-            startActivity(intent);
+            fragmentTransaction.replace(R.id.contenedor_fragment, fabout, tagfabout);
+            fragmentTransaction.commit();
 
         }
 
@@ -150,10 +122,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    //Cuando se cierra la app se para la musica
-    @Override
-    protected void onPause() {
-        super.onPause();
-        //musica.release();
-    }
 }

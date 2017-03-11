@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_main"
     android:layout_width="match_parent"
@@ -12,15 +10,12 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/fondoapp"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.trabajo.carlos.memorycardgamematerial.vistas.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:context="com.trabajo.carlos.memorycardgamematerial.fragments.MainFragment">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:id="@+id/contenedor_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"></LinearLayout>
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/btnPlay"
+        android:background="@drawable/play"/>
 
 </LinearLayout>

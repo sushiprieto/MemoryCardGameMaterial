@@ -17,15 +17,6 @@
             android:label="@string/title_activity_game"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".vistas.RankingActivity"
-            android:label="@string/title_activity_ranking" />
-        <activity
-            android:name=".vistas.AboutActivity"
-            android:label="@string/title_activity_about"/>
-        <activity
-            android:name=".vistas.ContactoActivity"
-            android:label="@string/title_activity_contacto" />
-        <activity
             android:name=".vistas.PantallaInicioActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

@@ -12,7 +12,7 @@ import com.trabajo.carlos.memorycardgamematerial.R;
  * Created by Carlos Prieto on 25/01/2017.
  */
 
-public class MemoryButton4x4 extends Button {
+public class MemoryButton4x4 extends android.support.v7.widget.AppCompatButton {
 
     public int fila;
     public int columna;

@@ -1,9 +1,12 @@
-package com.trabajo.carlos.memorycardgamematerial.vistas;
+package com.trabajo.carlos.memorycardgamematerial.fragments;
+
 
 import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -15,7 +18,10 @@ import com.trabajo.carlos.memorycardgamematerial.listas.CustomAdapter;
 
 import java.util.ArrayList;
 
-public class RankingActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class RankingFragment extends Fragment {
 
     private ListView lsvLista;
     private ArrayList<Persona> personas = new ArrayList<>();
@@ -23,14 +29,20 @@ public class RankingActivity extends AppCompatActivity {
 
     private Button btnLimpiar;
 
+    public RankingFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_ranking);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.fragment_ranking, container, false);
 
-        lsvLista = (ListView)findViewById(R.id.lsvLista);
+        lsvLista = (ListView)v.findViewById(R.id.lsvLista);
 
-        btnLimpiar = (Button)findViewById(R.id.btnLimpiar);
+        btnLimpiar = (Button)v.findViewById(R.id.btnLimpiar);
 
         btnLimpiar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,10 +54,11 @@ public class RankingActivity extends AppCompatActivity {
         });
 
         //Inicializamos el adapter de la lista
-        adapter = new CustomAdapter(this, personas);
+        adapter = new CustomAdapter(getActivity(), personas);
 
         this.getPersonas();
 
+        return v;
     }
 
     /**
@@ -55,7 +68,7 @@ public class RankingActivity extends AppCompatActivity {
     {
 
         personas.clear();
-        DBAdapter db = new DBAdapter(this);
+        DBAdapter db = new DBAdapter(getActivity());
         db.openDB();
 
         Cursor c = db.retrieve();
@@ -93,7 +106,7 @@ public class RankingActivity extends AppCompatActivity {
     private void limpiarRegistros()
     {
 
-        DBAdapter db = new DBAdapter(this);
+        DBAdapter db = new DBAdapter(getActivity());
         db.openDB();
 
         boolean deleted = db.limpiarRegistros();
@@ -107,18 +120,9 @@ public class RankingActivity extends AppCompatActivity {
 
         }else {
 
-            Toast.makeText(this, "No se puede borrar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "No se puede borrar", Toast.LENGTH_SHORT).show();
 
         }
-    }
-
-    /**
-     * Metodo para recargar la misma actividad
-     */
-    public void recargar(){
-
-        this.recreate();
-
     }
 
 }

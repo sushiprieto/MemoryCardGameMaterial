@@ -13,6 +13,7 @@
     <!--Titles-->
     <string name="app_name">MemoryCardGame</string>
     <string name="title_activity_game">Juego</string>
+    <string name="title_activity_main">Jugar</string>
     <string name="title_activity_ranking">Ranking Personal</string>
     <string name="title_activity_about">Sobre mi</string>
     <string name="title_activity_contacto">Contacto</string>
@@ -30,5 +31,8 @@
     <!--Buttons-->
     <string name="btnResetLista">Reiniciar lista</string>
     <string name="btnPlay">JUGAR</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
