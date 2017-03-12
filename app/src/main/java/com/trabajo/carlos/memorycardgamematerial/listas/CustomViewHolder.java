@@ -15,9 +15,9 @@ public class CustomViewHolder {
 
     public CustomViewHolder(View v) {
 
-        txvNombre = (TextView)v.findViewById(R.id.txvNombre);
-        txvTiempo = (TextView)v.findViewById(R.id.txvTiempo);
-        txvDificultad = (TextView)v.findViewById(R.id.txvDificultad);
+        txvNombre = (TextView) v.findViewById(R.id.txvNombre);
+        txvTiempo = (TextView) v.findViewById(R.id.txvTiempo);
+        txvDificultad = (TextView) v.findViewById(R.id.txvDificultad);
 
     }
 

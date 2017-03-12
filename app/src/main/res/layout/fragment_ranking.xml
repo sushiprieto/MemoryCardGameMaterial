@@ -3,19 +3,19 @@
     android:id="@+id/content_ranking"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/fondoapp"
+    android:orientation="vertical"
     tools:context="com.trabajo.carlos.memorycardgamematerial.fragments.RankingFragment">
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1">
 
         <ListView
+            android:id="@+id/lsvLista"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lsvLista"/>
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 
@@ -24,12 +24,12 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/btnLimpiar"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnLimpiar"
             android:text="@string/btnResetLista"
-            android:textColor="@color/colorLight"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+            android:textColor="@color/colorLight" />
 
     </RelativeLayout>
 

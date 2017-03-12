@@ -20,13 +20,11 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        try
-        {
+        try {
 
             db.execSQL(Constantes.CREATE_TB);
 
-        }catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

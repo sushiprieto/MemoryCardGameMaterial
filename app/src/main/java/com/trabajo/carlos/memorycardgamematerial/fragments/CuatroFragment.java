@@ -1,9 +1,14 @@
 package com.trabajo.carlos.memorycardgamematerial.fragments;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +21,9 @@ import android.widget.Toast;
 import com.trabajo.carlos.memorycardgamematerial.bbdd.DBAdapter;
 import com.trabajo.carlos.memorycardgamematerial.utilidades.MemoryButton4x4;
 import com.trabajo.carlos.memorycardgamematerial.R;
+import com.trabajo.carlos.memorycardgamematerial.vistas.GameActivity;
+import com.trabajo.carlos.memorycardgamematerial.vistas.MainActivity;
+import com.trabajo.carlos.memorycardgamematerial.vistas.PantallaInicioActivity;
 
 import java.util.Random;
 
@@ -45,6 +53,9 @@ public class CuatroFragment extends Fragment {
     private boolean isBussy = false;
 
     private GridLayout gridJuego;
+
+    private AlertDialog alerta;
+    private AlertDialog.Builder yesnoquestion;
 
     public CuatroFragment() {
         // Required empty public constructor
@@ -165,6 +176,38 @@ public class CuatroFragment extends Fragment {
                                 //Insertamos en la bbdd el nombre y el resultado
                                 save(nombreLogin, resultado, dificultad);
 
+                                //Pregunta yes/no para confirmar que quiere iniciar una nueva partida
+                                yesnoquestion = new AlertDialog.Builder(getActivity());
+                                yesnoquestion.setMessage("¿Quieres empezar una nueva partida?").setCancelable(false)
+                                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                            /**
+                                             * Primero cargamos el fragmen cuando pulse YES y luego recargamos la Activity para actualizar el cronómetro
+                                             * @param dialogInterface
+                                             * @param i
+                                             */
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                //Si pulsa que si recargamos el mismo fragment para que inicie una nueva partida
+                                                getFragmentManager().beginTransaction().replace(R.id.contenedor_fragment, CuatroFragment.newInstanceCuatro()).commit();
+
+                                            }
+                                        })
+                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                //Si pulsa que no volvemos al menu principal
+                                                Intent myIntent = new Intent(getActivity(), MainActivity.class);
+                                                getActivity().startActivity(myIntent);
+
+                                            }
+                                        });
+
+                                alerta = yesnoquestion.create();
+                                alerta.setTitle("¡ENHORABUENA!");
+                                alerta.show();
+
                             }
 
                             return;
@@ -207,11 +250,11 @@ public class CuatroFragment extends Fragment {
 
     /**
      * Metodo que guarda el nombre y el tiempo
+     *
      * @param name
      * @param time
      */
-    private void save(String name, String time, String dificultad)
-    {
+    private void save(String name, String time, String dificultad) {
 
         DBAdapter db = new DBAdapter(getActivity());
         db.openDB();
@@ -220,12 +263,11 @@ public class CuatroFragment extends Fragment {
         boolean saved = db.add(name, time, dificultad);
 
         //Si se ha guardado bien
-        if(saved)
-        {
+        if (saved) {
 
             Toast.makeText(getActivity(), "Insertado correctamente", Toast.LENGTH_SHORT).show();
 
-        }else {
+        } else {
 
             Toast.makeText(getActivity(), "No se puede guardar", Toast.LENGTH_SHORT).show();
 
@@ -258,6 +300,15 @@ public class CuatroFragment extends Fragment {
 
         }
 
+    }
+
+    /**
+     * Metodo que crea una nueva instancia de este mismo fragment
+     *
+     * @return
+     */
+    public static CuatroFragment newInstanceCuatro() {
+        return new CuatroFragment();
     }
 
 }

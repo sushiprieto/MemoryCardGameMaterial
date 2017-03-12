@@ -15,7 +15,7 @@ import com.trabajo.carlos.memorycardgamematerial.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContactFragment extends Fragment implements View.OnClickListener{
+public class ContactFragment extends Fragment implements View.OnClickListener {
 
     private Button btnTwitter, btnFacebook, btnInstagram;
 
@@ -29,9 +29,9 @@ public class ContactFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_contact, container, false);
 
-        btnTwitter = (Button)v.findViewById(R.id.btnTwitter);
-        btnFacebook = (Button)v.findViewById(R.id.btnFacebook);
-        btnInstagram = (Button)v.findViewById(R.id.btnInstagram);
+        btnTwitter = (Button) v.findViewById(R.id.btnTwitter);
+        btnFacebook = (Button) v.findViewById(R.id.btnFacebook);
+        btnInstagram = (Button) v.findViewById(R.id.btnInstagram);
 
         btnTwitter.setOnClickListener(this);
         btnFacebook.setOnClickListener(this);
@@ -43,7 +43,7 @@ public class ContactFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
 
             case R.id.btnTwitter:
 

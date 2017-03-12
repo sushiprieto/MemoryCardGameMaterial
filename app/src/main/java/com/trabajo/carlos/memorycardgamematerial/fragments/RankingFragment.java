@@ -39,9 +39,9 @@ public class RankingFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_ranking, container, false);
 
-        lsvLista = (ListView)v.findViewById(R.id.lsvLista);
+        lsvLista = (ListView) v.findViewById(R.id.lsvLista);
 
-        btnLimpiar = (Button)v.findViewById(R.id.btnLimpiar);
+        btnLimpiar = (Button) v.findViewById(R.id.btnLimpiar);
 
         btnLimpiar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,8 +63,7 @@ public class RankingFragment extends Fragment {
     /**
      * Metodo donde obtenemos todos los nombres y tiempos de la BBDD
      */
-    private void getPersonas()
-    {
+    private void getPersonas() {
 
         personas.clear();
         DBAdapter db = new DBAdapter(getActivity());
@@ -74,8 +73,7 @@ public class RankingFragment extends Fragment {
         Persona persona = null;
 
         //Va recorriendo el cursor en busca de datos
-        while (c.moveToNext())
-        {
+        while (c.moveToNext()) {
 
             int id = c.getInt(0);
             String name = c.getString(1);
@@ -102,8 +100,7 @@ public class RankingFragment extends Fragment {
     /**
      * Metodo que borra un nombre de la BBDD
      */
-    private void limpiarRegistros()
-    {
+    private void limpiarRegistros() {
 
         DBAdapter db = new DBAdapter(getActivity());
         db.openDB();
@@ -112,12 +109,11 @@ public class RankingFragment extends Fragment {
         db.closeDB();
 
         //Si se ha borrado bien
-        if(deleted)
-        {
+        if (deleted) {
 
             getPersonas();
 
-        }else {
+        } else {
 
             Toast.makeText(getActivity(), "No se puede borrar", Toast.LENGTH_SHORT).show();
 

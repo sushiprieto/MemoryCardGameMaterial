@@ -1,9 +1,12 @@
 package com.trabajo.carlos.memorycardgamematerial.fragments;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +19,7 @@ import android.widget.Toast;
 import com.trabajo.carlos.memorycardgamematerial.bbdd.DBAdapter;
 import com.trabajo.carlos.memorycardgamematerial.utilidades.MemoryButton6x6;
 import com.trabajo.carlos.memorycardgamematerial.R;
+import com.trabajo.carlos.memorycardgamematerial.vistas.MainActivity;
 
 import java.util.Random;
 
@@ -46,6 +50,9 @@ public class SeisFragment extends Fragment {
 
     private GridLayout gridJuego;
 
+    private AlertDialog alerta;
+    private AlertDialog.Builder yesnoquestion;
+
     public SeisFragment() {
         // Required empty public constructor
     }
@@ -56,10 +63,10 @@ public class SeisFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_seis, container, false);
 
-        gridJuego = (GridLayout)v.findViewById(R.id.contenedorGrid6x6);
+        gridJuego = (GridLayout) v.findViewById(R.id.contenedorGrid6x6);
 
-        cronometrito = (Chronometer)v.findViewById(R.id.chrCronometro6x6);
-        txvCronometro = (TextView)v.findViewById(R.id.txvCronometro6x6);
+        cronometrito = (Chronometer) v.findViewById(R.id.chrCronometro6x6);
+        txvCronometro = (TextView) v.findViewById(R.id.txvCronometro6x6);
 
         int numColumns = gridJuego.getColumnCount();
         int numRows = gridJuego.getRowCount();
@@ -93,9 +100,9 @@ public class SeisFragment extends Fragment {
 
         shuffleButtonGraphics();
 
-        for (int r = 0; r < numRows; r++){
+        for (int r = 0; r < numRows; r++) {
 
-            for (int c = 0; c < numColumns; c++){
+            for (int c = 0; c < numColumns; c++) {
 
                 MemoryButton6x6 tempButton = new MemoryButton6x6(getActivity(), r, c, buttonGraphics[buttonGraphicLocation[r * numColumns + c]]);
                 tempButton.setId(View.generateViewId());
@@ -146,7 +153,7 @@ public class SeisFragment extends Fragment {
                             selectedButton1 = null;
 
                             //Le mando un mensajito pa que se entere que ha ganado
-                            if(ganar == 18){
+                            if (ganar == 18) {
 
                                 //Paramos el cronometro y lo metemos en una variable para mostrar el tiempo que ha tardado
                                 cronometrito.stop();
@@ -171,6 +178,38 @@ public class SeisFragment extends Fragment {
 
                                 //Insertamos en la bbdd el nombre y el resultado
                                 save(nombreLogin, resultado, dificultad);
+
+                                //Pregunta yes/no para confirmar que quiere iniciar una nueva partida
+                                yesnoquestion = new AlertDialog.Builder(getActivity());
+                                yesnoquestion.setMessage("¿Quieres empezar una nueva partida?").setCancelable(false)
+                                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                            /**
+                                             * Primero cargamos el fragmen cuando pulse YES y luego recargamos la Activity para actualizar el cronómetro
+                                             * @param dialogInterface
+                                             * @param i
+                                             */
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                //Si pulsa que si recargamos el mismo fragment para que inicie una nueva partida
+                                                getFragmentManager().beginTransaction().replace(R.id.contenedor_fragment, SeisFragment.newInstanceSeis()).commit();
+
+                                            }
+                                        })
+                                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                                //Si pulsa que no volvemos al menu principal
+                                                Intent myIntent = new Intent(getActivity(), MainActivity.class);
+                                                getActivity().startActivity(myIntent);
+
+                                            }
+                                        });
+
+                                alerta = yesnoquestion.create();
+                                alerta.setTitle("¡ENHORABUENA!");
+                                alerta.show();
 
                             }
 
@@ -212,11 +251,11 @@ public class SeisFragment extends Fragment {
 
     /**
      * Metodo que guarda el nombre y el tiempo
+     *
      * @param name
      * @param time
      */
-    private void save(String name, String time, String dificultad)
-    {
+    private void save(String name, String time, String dificultad) {
 
         DBAdapter db = new DBAdapter(getActivity());
         db.openDB();
@@ -224,12 +263,11 @@ public class SeisFragment extends Fragment {
         boolean saved = db.add(name, time, dificultad);
 
         //Si se ha guardado bien
-        if(saved)
-        {
+        if (saved) {
 
             Toast.makeText(getActivity(), "Insertado correctamente", Toast.LENGTH_SHORT).show();
 
-        }else {
+        } else {
 
             Toast.makeText(getActivity(), "No se puede guardar", Toast.LENGTH_SHORT).show();
 
@@ -240,17 +278,17 @@ public class SeisFragment extends Fragment {
     /**
      * Metodo que genera el random donde aparecen las imagenes
      */
-    protected void shuffleButtonGraphics(){
+    protected void shuffleButtonGraphics() {
 
         Random rand = new Random();
 
-        for (int i = 0; i < numberOfElements; i++){
+        for (int i = 0; i < numberOfElements; i++) {
 
             buttonGraphicLocation[i] = i % (numberOfElements / 2);
 
         }
 
-        for (int i = 0; i < numberOfElements; i++){
+        for (int i = 0; i < numberOfElements; i++) {
 
             int temp = buttonGraphicLocation[i];
 
@@ -262,6 +300,15 @@ public class SeisFragment extends Fragment {
 
         }
 
+    }
+
+    /**
+     * Metodo que crea una nueva instancia de este mismo fragment
+     *
+     * @return
+     */
+    public static SeisFragment newInstanceSeis() {
+        return new SeisFragment();
     }
 
 }

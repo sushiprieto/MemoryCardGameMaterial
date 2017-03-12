@@ -47,12 +47,10 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        if(inflater == null)
-        {
-            inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if (inflater == null) {
+            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
-        if(convertView == null)
-        {
+        if (convertView == null) {
             //Inflamos la lista
             convertView = inflater.inflate(R.layout.fila_lista, parent, false);
         }
@@ -66,23 +64,19 @@ public class CustomAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public int getSelectedItemID()
-    {
+    public int getSelectedItemID() {
         return persona.getId();
     }
 
-    public String getSelectedItemName()
-    {
+    public String getSelectedItemName() {
         return persona.getNombre();
     }
 
-    public String getSelectedItemTime()
-    {
+    public String getSelectedItemTime() {
         return persona.getTiempo();
     }
 
-    public String getSelectedItemDificultad()
-    {
+    public String getSelectedItemDificultad() {
         return persona.getDificultad();
     }
 

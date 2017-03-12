@@ -14,8 +14,6 @@ import com.trabajo.carlos.memorycardgamematerial.R;
 
 public class MemoryButton6x6 extends android.support.v7.widget.AppCompatButton {
 
-    public int fila;
-    public int columna;
     public int frontDrawableId;
 
     public boolean isFlipped;
@@ -37,10 +35,10 @@ public class MemoryButton6x6 extends android.support.v7.widget.AppCompatButton {
         GridLayout.LayoutParams grid = new GridLayout.LayoutParams(GridLayout.spec(fila), GridLayout.spec(columna));
 
         //Aqui cambiamos las propiedades del GridLayout
-        grid.width = (int)getResources().getDisplayMetrics().density * 40;
-        grid.height = (int)getResources().getDisplayMetrics().density * 40;
-        grid.bottomMargin = (int)getResources().getDisplayMetrics().density * 20;
-        grid.rightMargin = (int)getResources().getDisplayMetrics().density * 10;
+        grid.width = (int) getResources().getDisplayMetrics().density * 40;
+        grid.height = (int) getResources().getDisplayMetrics().density * 40;
+        grid.bottomMargin = (int) getResources().getDisplayMetrics().density * 20;
+        grid.rightMargin = (int) getResources().getDisplayMetrics().density * 10;
 
         setLayoutParams(grid);
 
@@ -57,16 +55,16 @@ public class MemoryButton6x6 extends android.support.v7.widget.AppCompatButton {
     /**
      * Metodo para voltear la carta
      */
-    public void flip(){
+    public void flip() {
 
-        if (isMatched){
+        if (isMatched) {
             return;
         }
 
-        if (isFlipped){
+        if (isFlipped) {
             setBackground(back);
             isFlipped = false;
-        }else{
+        } else {
             setBackground(front);
             isFlipped = true;
         }

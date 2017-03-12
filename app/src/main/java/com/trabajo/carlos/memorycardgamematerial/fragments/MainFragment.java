@@ -35,7 +35,7 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_main, container, false);
 
-        btnPlay = (ImageButton)v.findViewById(R.id.btnPlay);
+        btnPlay = (ImageButton) v.findViewById(R.id.btnPlay);
 
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,11 +67,11 @@ public class MainFragment extends Fragment {
             public void onClick(DialogInterface dialog, int whichButton) {
 
                 //Comprobamos que no se inserte el campo vacio
-                if (edtLogin.getText().toString().equals("")){
+                if (edtLogin.getText().toString().equals("")) {
 
                     Toast.makeText(getActivity(), "Debe insertar un nombre", Toast.LENGTH_SHORT).show();
 
-                }else{
+                } else {
 
                     //Recogemos el nombre introducido para enviarlo a la otra actividad
                     nombreLogin = edtLogin.getText().toString();

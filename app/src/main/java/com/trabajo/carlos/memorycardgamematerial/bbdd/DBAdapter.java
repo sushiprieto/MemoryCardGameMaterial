@@ -24,15 +24,12 @@ public class DBAdapter {
     /**
      * Metodo que abre una conexion
      */
-    public void openDB()
-    {
-        try
-        {
+    public void openDB() {
+        try {
 
             db = helper.getWritableDatabase();
 
-        }catch (SQLException e)
-        {
+        } catch (SQLException e) {
 
         }
     }
@@ -40,28 +37,24 @@ public class DBAdapter {
     /**
      * Metodo que cierra la BBDD
      */
-    public void closeDB()
-    {
-        try
-        {
+    public void closeDB() {
+        try {
 
             helper.close();
 
-        }catch (SQLException e)
-        {
+        } catch (SQLException e) {
 
         }
     }
 
     /**
      * Metodo para insertar un nombre y un tiempo
+     *
      * @param name
      * @return
      */
-    public boolean add(String name, String time, String dificultad)
-    {
-        try
-        {
+    public boolean add(String name, String time, String dificultad) {
+        try {
 
             ContentValues cv = new ContentValues();
             cv.put(Constantes.COLUMN_NOMBRE, name);
@@ -70,13 +63,11 @@ public class DBAdapter {
 
             long result = db.insert(Constantes.TABLE_NAME, Constantes.COLUMN_ID, cv);
 
-            if(result>0)
-            {
+            if (result > 0) {
                 return true;
             }
 
-        }catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
@@ -85,10 +76,10 @@ public class DBAdapter {
 
     /**
      * Metodo que hace un select a la BBDD
+     *
      * @return
      */
-    public Cursor retrieve()
-    {
+    public Cursor retrieve() {
         String[] columns = {Constantes.COLUMN_ID, Constantes.COLUMN_NOMBRE, Constantes.COLUMN_TIEMPO, Constantes.COLUMN_DIFICULTAD};
 
         Cursor c = db.query(Constantes.TABLE_NAME, columns, null, null, null, null, null);
@@ -97,22 +88,19 @@ public class DBAdapter {
 
     /**
      * Metodo que elimina un campo de la BBDD
+     *
      * @return
      */
-    public boolean limpiarRegistros()
-    {
-        try
-        {
+    public boolean limpiarRegistros() {
+        try {
 
             int result = db.delete(Constantes.TABLE_NAME, null, null);
 
-            if(result > 0)
-            {
+            if (result > 0) {
                 return true;
             }
 
-        }catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

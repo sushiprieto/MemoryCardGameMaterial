@@ -12,11 +12,11 @@
             android:title="@string/title_activity_ranking" />
         <item
             android:id="@+id/nav_contacto"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_share_black_24dp"
             android:title="@string/title_activity_contacto" />
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/ic_person_outline_black_24dp"
             android:title="@string/title_activity_about" />
     </group>
 

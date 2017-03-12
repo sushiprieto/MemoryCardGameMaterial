@@ -4,11 +4,11 @@
     android:id="@+id/content_game"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondoapp"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/fondoapp"
     tools:context="com.trabajo.carlos.memorycardgamematerial.vistas.GameActivity">
 
     <ScrollView
@@ -20,55 +20,56 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
+                android:id="@+id/liBotones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/liBotones"
-                android:orientation="horizontal" android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/txtNombreLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#EDE7F6"
+                    android:layout_marginEnd="30dp"
                     android:maxWidth="75dp"
-                    android:id="@+id/txtNombreLogin"
-                    android:layout_marginEnd="30dp"/>
+                    android:textColor="#EDE7F6" />
 
                 <Button
-                    android:text="@string/menu_opciones"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxWidth="100dp"
-                    android:maxHeight="20dp"
                     android:id="@+id/btn4x4"
                     style="@style/Widget.AppCompat.Button.Colored"
-                    android:layout_marginEnd="30dp"/>
-
-                <Button
-                    android:text="@string/menu_opciones2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxWidth="100dp"
+                    android:layout_marginEnd="30dp"
                     android:maxHeight="20dp"
+                    android:maxWidth="100dp"
+                    android:text="@string/menu_opciones" />
+
+                <Button
                     android:id="@+id/btn6x6"
-                    style="@style/Widget.AppCompat.Button.Colored"/>
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxHeight="20dp"
+                    android:maxWidth="100dp"
+                    android:text="@string/menu_opciones2" />
 
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/contenedor_fragment"
+                android:name="com.trabajo.araceli.memorycardgamefragment.CuatroFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:name="com.trabajo.araceli.memorycardgamefragment.CuatroFragment"
                 android:layout_below="@+id/liBotones"
-                android:id="@+id/contenedor_fragment" />
+                android:gravity="center"
+                android:orientation="horizontal" />
 
             <LinearLayout
+                android:id="@+id/cronometro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/cronometro"
-                android:orientation="horizontal"
-                android:layout_below="@id/contenedor_fragment">
+                android:layout_below="@id/contenedor_fragment"
+                android:orientation="horizontal">
 
             </LinearLayout>
 

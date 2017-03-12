@@ -39,10 +39,10 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_game);
 
-        btn4x4 = (Button)findViewById(R.id.btn4x4);
-        btn6x6 = (Button)findViewById(R.id.btn6x6);
+        btn4x4 = (Button) findViewById(R.id.btn4x4);
+        btn6x6 = (Button) findViewById(R.id.btn6x6);
 
-        txvNombreLogin = (TextView)findViewById(R.id.txtNombreLogin);
+        txvNombreLogin = (TextView) findViewById(R.id.txtNombreLogin);
 
         //Creamos un Bundle donde guardar los datos recibidos
         Bundle recogerNombreLogin = getIntent().getExtras();
@@ -148,7 +148,7 @@ public class GameActivity extends AppCompatActivity {
     /**
      * Metodo para recargar la misma actividad
      */
-    public void recargar(){
+    public void recargar() {
 
         this.recreate();
 
